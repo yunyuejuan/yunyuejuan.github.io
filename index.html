@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>云阅卷账号请求工具</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+    }
+    label, select, input {
+      margin-top: 10px;
+      display: block;
+    }
+    button {
+      margin-top: 20px;
+      padding: 8px 16px;
+    }
+    #tips {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #f3f3f3;
+      border-radius: 8px;
+      border-left: 5px solid #888;
+    }
+    #tips h3 {
+      margin-top: 0;
+    }
+    #status {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>账号请求工具</h2>
+
+  <label for="mode">选择模式：</label>
+  <select id="mode" onchange="onModeChange()">
+    <option value="1">顶号模式</option>
+    <option value="2">打号模式</option>
+  </select>
+
+  <label for="username">请输入手机号：</label>
+  <input type="text" id="username" placeholder="手机号">
+
+  <label for="password">请输入密码：</label>
+  <input type="password" id="password" placeholder="密码">
+
+  <label for="interval">请求间隔（秒）：</label>
+  <input type="number" id="interval" value="1" min="0.1" step="0.1">
+
+  <button onclick="start()">开始发送请求</button>
+  <button onclick="stop()">停止</button>
+
+  <p id="status">请求尚未开始</p>
+
+  <div id="tips">
+    <h3>小贴士:</h3>
+    <p>打号模式需要知道手机号和密码，顶号模式只需要知道手机号就行。</p>
+
+    <h3>原理:</h3>
+    <p>云阅卷平台只允许一个设备登入账号，当其他人登入账号成功的时候会把上一个登入者踢下去，这和微信登入是一样的，只允许一台设备登入。</p>
+    <p>云阅卷平台限制登入者输入密码次数为10次，当登入者输入超过10次的错误密码会提示冻结账号10分钟不让登入者登入成功，因为不是限制登入者的设备IP，所以当你输入密码错误超过10次被冻结账号10分钟之后，对方也是登不不了的，同样是被冻结账号10分钟。</p>
+    <p>(依靠浏览器F12抓包网页请求分析得出来的漏洞，经过CURL模拟请求确实可以把这些漏洞复现。)</p>
+    <p>(建议与代理软件和梯子VPN等翻墙软件配合使用，并且打开全局代理模式，这样可以隐藏您设备的IP地址，以便减少不必要的麻烦。)</p>
+    <p>(建议不要把 请求间隔（秒）的时间设置的太短，防止服务器以为你是DDOS攻击者而封禁设备IP。)</p>
+    <p><strong>宇宙安全声明：本网页仅供学习与参考交流，严禁用于商业用途，请于24小时内关闭此网页。</strong></p>
+  </div>
+
+  <script src="src/app.js"></script>
+</body>
+</html>

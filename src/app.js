@@ -26,7 +26,7 @@ function sendRequest(username, password) {
   data.append("j_username", username);
   data.append("j_password", passwordBase64);
 
-  fetch("https://jl.yunyuejuan.net/SystemLogin", {
+  fetch("https://hlj.yunyuejuan.net/SystemLogin", {
     method: "POST",
     headers: {
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
